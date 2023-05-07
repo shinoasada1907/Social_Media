@@ -17,12 +17,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => WelcomeBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          // lazy: false,
+          create: (context) => WelcomeBloc(),
+        ),
+        BlocProvider(
+          // lazy: false,
+          create: (context) => AppBloc(),
+        ),
+      ],
       child: ScreenUtilInit(
-        builder: (context, child) => const MaterialApp(
+        builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: Welcome(),
+          home: const Welcome(),
+          routes: {
+            '/myHomePage': (context) => const MyHomePage(title: 'Demo'),
+          },
         ),
       ),
     );
@@ -38,6 +50,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text(title),
         ),
         body: Center(child: BlocBuilder<AppBloc, AppState>(
@@ -60,12 +73,14 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             FloatingActionButton(
+              heroTag: 'herotag1',
               onPressed: () =>
                   BlocProvider.of<AppBloc>(context).add(IncrementEvent()),
               tooltip: 'Increment',
               child: const Icon(Icons.add),
             ),
             FloatingActionButton(
+              heroTag: 'herotag2',
               onPressed: () =>
                   BlocProvider.of<AppBloc>(context).add(DecrementEvent()),
               tooltip: 'Decrement',

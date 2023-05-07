@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/main.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_events.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_states.dart';
@@ -40,7 +41,7 @@ class _WelcomeState extends State<Welcome> {
                         1,
                         context,
                         'Next',
-                        'Fisrt See Learning',
+                        'First See Learning',
                         'Forget about a for of pager all knowledge in one learning!',
                         'assets/images/reading.png',
                       ),
@@ -129,10 +130,17 @@ class _WelcomeState extends State<Welcome> {
               //animation
               pageController.animateToPage(
                 index,
-                duration: const Duration(milliseconds: 1000),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.easeIn,
               );
-            } else {}
+            } else {
+              //Navigation Screen
+              // Navigator.of(context).push(MaterialPageRoute(
+              //   builder: (context) => const MyHomePage(title: 'Demo'),
+              // ));
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/myHomePage', (route) => false);
+            }
           },
           child: Container(
             margin: EdgeInsets.only(top: 100.h, left: 25.w, right: 25.w),
