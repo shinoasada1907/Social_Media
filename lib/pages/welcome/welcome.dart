@@ -139,7 +139,7 @@ class _WelcomeState extends State<Welcome> {
               //   builder: (context) => const MyHomePage(title: 'Demo'),
               // ));
               Navigator.pushNamedAndRemoveUntil(
-                  context, '/myHomePage', (route) => false);
+                  context, '/signInScreen', (route) => false);
             }
           },
           child: Container(
