@@ -71,7 +71,8 @@ Widget reusableText(String text) {
   );
 }
 
-Widget buildTextField(String hintText, String textStype, String iconName) {
+Widget buildTextField(String hintText, String textStype, String iconName,
+    void Function(String value)? func) {
   return Container(
     width: 325.w,
     height: 50.h,
@@ -99,6 +100,7 @@ Widget buildTextField(String hintText, String textStype, String iconName) {
           width: 270.w,
           height: 50.h,
           child: TextField(
+            onChanged: (value) => func!(value),
             decoration: InputDecoration(
               hintText: hintText,
               border: const OutlineInputBorder(
@@ -161,9 +163,10 @@ Widget forgotpassword() {
   );
 }
 
-Widget buildLoginAndRegButton(String buttonName, String buttonType) {
+Widget buildLoginAndRegButton(
+    String buttonName, String buttonType, void Function()? func) {
   return GestureDetector(
-    onTap: () {},
+    onTap: func,
     child: Container(
       margin: EdgeInsets.only(
         left: 25.w,
